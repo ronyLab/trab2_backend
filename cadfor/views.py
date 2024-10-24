@@ -28,11 +28,19 @@ class FornecedorDeleteView(DeleteView):
 class ContatoListView(ListView):
     model = Contato
     template_name = 'contato_list.html'
+# 
+
 
 class ContatoCreateView(CreateView):
     model = Contato
     fields = ['tipo', 'detalhe', 'fornecedor']
-    success_url = reverse_lazy('contato_list')
+
+    # Retorna para a página anterior usando HTTP_REFERER/mantém na página de criação
+    def get_success_url(self):
+        return self.request.META.get('HTTP_REFERER')
+
+
+
 
 class ContatoUpdateView(UpdateView):
     model = Contato
@@ -61,3 +69,25 @@ class ProdutoUpdateView(UpdateView):
 class ProdutoDeleteView(DeleteView):
     model = Produto
     success_url = reverse_lazy('produto_list')
+    
+    
+    
+    # views.py
+
+# views.py
+
+from django.views.generic import DetailView
+from .models import Fornecedor
+
+# Detalhe do Fornecedor
+class FornecedorDetailView(DetailView):
+    model = Fornecedor
+    template_name = 'cadfor/fornecedor_detail.html'
+    context_object_name = 'fornecedor'
+
+    # Sobrescrever o método para adicionar os contatos e produtos no contexto
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['contatos'] = self.object.contatos.all()  # Contatos relacionados ao fornecedor
+        context['produtos'] = self.object.produtos.all()  # Produtos relacionados ao fornecedor
+        return context

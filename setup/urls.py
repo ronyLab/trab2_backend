@@ -23,6 +23,17 @@ from cadfor.views import (
     ProdutoListView, ProdutoCreateView, ProdutoUpdateView, ProdutoDeleteView
 )
 
+# urls.py
+
+from django.urls import path
+from cadfor.views import (
+    FornecedorListView, FornecedorCreateView, FornecedorUpdateView, FornecedorDeleteView,
+    ContatoListView, ContatoCreateView, ContatoUpdateView, ContatoDeleteView,
+    ProdutoListView, ProdutoCreateView, ProdutoUpdateView, ProdutoDeleteView,
+    FornecedorDetailView  # Import da DetailView para o perfil do fornecedor
+)
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     
@@ -31,6 +42,7 @@ urlpatterns = [
     path("fornecedor/create/", FornecedorCreateView.as_view(), name="fornecedor_create"),
     path("fornecedor/<int:pk>/update/", FornecedorUpdateView.as_view(), name="fornecedor_update"),
     path("fornecedor/<int:pk>/delete/", FornecedorDeleteView.as_view(), name="fornecedor_delete"),
+    path('fornecedor/<int:pk>/', FornecedorDetailView.as_view(), name='fornecedor_detail'),
 
     # Contato URLs
     path("contatos/", ContatoListView.as_view(), name="contato_list"),
