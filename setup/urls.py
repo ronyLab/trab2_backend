@@ -19,39 +19,28 @@ from django.urls import path
 
 from cadfor.views import (
     FornecedorListView, FornecedorCreateView, FornecedorUpdateView, FornecedorDeleteView,
-    ContatoListView, ContatoCreateView, ContatoUpdateView, ContatoDeleteView,
-    ProdutoListView, ProdutoCreateView, ProdutoUpdateView, ProdutoDeleteView
-)
-
-# urls.py
-
-from django.urls import path
-from cadfor.views import (
-    FornecedorListView, FornecedorCreateView, FornecedorUpdateView, FornecedorDeleteView,
-    ContatoListView, ContatoCreateView, ContatoUpdateView, ContatoDeleteView,
-    ProdutoListView, ProdutoCreateView, ProdutoUpdateView, ProdutoDeleteView,
-    FornecedorDetailView  # Import da DetailView para o perfil do fornecedor
+    ContatoCreateView, ContatoUpdateView, ContatoDeleteView, ProdutoCreateView, ProdutoUpdateView, 
+    ProdutoDeleteView, FornecedorDetailView, ContatoListView
 )
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     
-    # Fornecedor URLs
     path("", FornecedorListView.as_view(), name="fornecedor_list"),
     path("fornecedor/create/", FornecedorCreateView.as_view(), name="fornecedor_create"),
     path("fornecedor/<int:pk>/update/", FornecedorUpdateView.as_view(), name="fornecedor_update"),
     path("fornecedor/<int:pk>/delete/", FornecedorDeleteView.as_view(), name="fornecedor_delete"),
+    
+    # esse é oque usa DetailView, recurso que nao vimos ainda
     path('fornecedor/<int:pk>/', FornecedorDetailView.as_view(), name='fornecedor_detail'),
+    
+    path('contato/list/<int:pk>/', ContatoListView.as_view(), name='contato_list'),
 
-    # Contato URLs
-    path("contatos/", ContatoListView.as_view(), name="contato_list"),
     path("contato/create/", ContatoCreateView.as_view(), name="contato_create"),
     path("contato/<int:pk>/update/", ContatoUpdateView.as_view(), name="contato_update"),
     path("contato/<int:pk>/delete/", ContatoDeleteView.as_view(), name="contato_delete"),
-    
-    # Produto URLs
-    path("produtos/", ProdutoListView.as_view(), name="produto_list"),
+
     path("produto/create/", ProdutoCreateView.as_view(), name="produto_create"),
     path("produto/<int:pk>/update/", ProdutoUpdateView.as_view(), name="produto_update"),
     path("produto/<int:pk>/delete/", ProdutoDeleteView.as_view(), name="produto_delete"),

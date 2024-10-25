@@ -8,12 +8,12 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1>Excluir Tarefa?</h1>
-        <p>Você tem certeza que deseja excluir esta tarefa?</p>
+        <h1>Remover Fornecedor?</h1>
+        <p>Você tem certeza que deseja <b>REMOVER</b> este fornecedor?</p>
         <form method="POST">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Excluir</button>
-            <a href="{% url 'fornecedor_list' %}" class="btn btn-primary">Cancelar</a>
+            <button type="submit" class="btn btn-danger">Sim, quero excluir <b>TODOS OS DADOS</b> relacionados à este fornecedor</button>
+            <a href="{% url 'fornecedor_list' %}" class="btn btn-primary">Não</a>
         </form>
     </div>
 </body>
